@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/grycap/awm:
+      branch: main
+      repo: https://github.com/grycap/awm
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/grycap/awm git:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-cerulean-discus.sh
+        container: qc.acc_randy-razzmatazz-magpie
+  QC.Doc:
+    repos:
+      github.com/grycap/awm find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-xanthic-dugong.sh
+        container: qc.doc_woolly-emerald-bombay
+      github.com/grycap/awm git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-blue-bee.sh
+        container: qc.doc_hasty-razzmatazz-frog
+      github.com/grycap/awm markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-silver-goose.sh
+        container: qc.doc_slaphappy-wheat-bulldog
+  QC.Lic:
+    repos:
+      github.com/grycap/awm licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-azure-magpie.sh
+        container: qc.lic_stealthy-ochre-grasshopper
+  QC.Sec:
+    repos:
+      github.com/grycap/awm bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-fuchsia-kingfisher.sh
+        container: qc.sec_gamy-coral-rhinoceros
+  QC.Sty:
+    repos:
+      github.com/grycap/awm flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-olive-schnauzer.sh
+        container: qc.sty_flimsy-violet-quoll
+      github.com/grycap/awm hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-blue-frog.sh
+        container: qc.sty_snippy-olive-cattle
+  QC.Uni:
+    repos:
+      github.com/grycap/awm pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-thistle-urchin.sh
+        container: qc.uni_snazzy-tomato-koala
+  QC.Ver:
+    repos:
+      github.com/grycap/awm get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-buff-dog.sh
+        container: qc.ver_wheezy-ivory-rhinoceros
+timeout: 5400
